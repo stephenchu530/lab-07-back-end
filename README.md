@@ -19,8 +19,9 @@ From the terminal, run one of the following to make a local copy:
 * https: `git clone https://github.com/stephenchu530/lab-07-back-end.git`
 
 ### Usage:
-* Change directory into the project directory and load `index.html` in your favorite browser.
-* Or go to: [TBD](TBD)
+* In the CLI, run: `$ node server.js`
+* Or go to: [heroku deployed site](https://glacial-eyrie-10319.herokuapp.com/)
+
 
 ## Architecture
   Node.js, dotenv, cors, express, Heroku
