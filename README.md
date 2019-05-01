@@ -5,6 +5,7 @@
 City Explorer backend app
 
 **Author**: Stephen Chu,
+
 **Version**: 1.1.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
@@ -37,21 +38,17 @@ From the terminal, run one of the following to make a local copy:
 * Stephen Chu, [stephenchu530](https://github.com/stephenchu530)
 
 ## Time Estimation
+```
+Number and name of feature: Refactor callback to use .map()
 
-  Number and name of feature: Refactor callback to use .map()
+Estimate of time needed to complete: ____
 
-  Estimate of time needed to complete: ____
+Start time: ____
 
-  Start time: ____
+Finish time: ____
 
-  Finish time: ____
-
-  Actual time needed to complete: ____
-
-
-## Usage:
-* Change directory into the project directory and load `index.html` in your favorite browser.
-* Or go to: [TBD](TBD)
+Actual time needed to complete: ____
+```
 
 ## License:
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/stephenchu530/lab-07-back-end/blob/master/LICENSE)
