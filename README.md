@@ -61,6 +61,17 @@ Finish time: 1015
 
 Actual time needed to complete: 60min
 ```
+```
+Number and name of feature: Implement darksky api call
+
+Estimate of time needed to complete: 60min
+
+Start time: 1015
+
+Finish time: 1045
+
+Actual time needed to complete: 30min
+```
 
 ## License:
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/stephenchu530/lab-07-back-end/blob/master/LICENSE)

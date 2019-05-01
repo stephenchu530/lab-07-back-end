@@ -15,8 +15,7 @@ app.get('/hello', (request, response) => {
 
 app.get('/location', (request, response) => {
   const queryData = request.query.data;
-  let geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${queryData}&key=AIzaSyBfOxvSAEhF0bINfqhSTthhNKEBb8eHfHc`;
-  console.log('URL:', geocodeURL);
+  let geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${queryData}&key=${process.env.GEOCODE_API_KEY}`;
   superagent.get(geocodeURL)
     .end((err, res) => {
       if (err && err.status !== 200) {
@@ -24,7 +23,6 @@ app.get('/location', (request, response) => {
 
         response.status(500).send(errorResponse500);
       } else {
-        console.log('RES:',res);
         const location = new Location(queryData, res);
         response.status(200).send(location);
       }
@@ -32,16 +30,20 @@ app.get('/location', (request, response) => {
 });
 
 app.get('/weather', (request, response) => {
-  try {
-    const weatherData = require('./data/darksky.json');
-    const weatherObj = new Weather(weatherData);
+  const lat = request.query.data.latitude;
+  const lng = request.query.data.longitude;
+  const weatherURL =`https://api.darksky.net/forecast/${process.env.WEATHER_API_KEY}/${lat},${lng}`
+  superagent.get(weatherURL)
+    .end((err, res) => {
+      if (err && err.status !== 200) {
+        const errorResponse500 = {'status': 500, 'responseText': 'Sorry, something went wrong' };
 
-    response.status(200).send(weatherObj.dailyForecast);
-  } catch (error) {
-    const errorResponse500 = {'status': 500, 'responseText': 'Sorry, something went wrong' };
-
-    response.status(500).send(errorResponse500);
-  }
+        response.status(500).send(errorResponse500);
+      } else {
+        const weather = new Weather(res);
+        response.status(200).send(weather.dailyForecast);
+      }
+    });
 });
 
 
@@ -61,7 +63,7 @@ const Location = function(searchQuery, jsonData) {
 };
 
 const Weather = function(jsonData) {
-  this.dailyForecast = [...jsonData['daily']['data']].map(forecast => {
+  this.dailyForecast = [...jsonData.body.daily.data].map(forecast => {
     const summary = forecast['summary'];
     const time = (new Date(forecast['time'] * 1000)).toDateString();
     return {
