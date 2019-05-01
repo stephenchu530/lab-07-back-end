@@ -32,7 +32,7 @@ app.get('/location', (request, response) => {
 app.get('/weather', (request, response) => {
   const lat = request.query.data.latitude;
   const lng = request.query.data.longitude;
-  const weatherURL =`https://api.darksky.net/forecast/${process.env.WEATHER_API_KEY}/${lat},${lng}`
+  const weatherURL =`https://api.darksky.net/forecast/${process.env.WEATHER_API_KEY}/${lat},${lng}`;
   superagent.get(weatherURL)
     .end((err, res) => {
       if (err && err.status !== 200) {
@@ -42,6 +42,23 @@ app.get('/weather', (request, response) => {
       } else {
         const weather = new Weather(res);
         response.status(200).send(weather.dailyForecast);
+      }
+    });
+});
+
+app.get('/events', (request, response) => {
+  const lat = request.query.data.latitude;
+  const lng = request.query.data.longitude;
+  const eventURL =`https://www.eventbriteapi.com/v3/events/search?location.longitude=${lng}&location.latitude=${lat}&expand=venue&token=${process.env.EVENTBRITE_API_KEY}`;
+  superagent.get(eventURL)
+    .end((err, res) => {
+      if (err && err.status !== 200) {
+        const errorResponse500 = {'status': 500, 'responseText': 'Sorry, something went wrong' };
+
+        response.status(500).send(errorResponse500);
+      } else {
+        const event = new Event(res);
+        response.status(200).send(event.events);
       }
     });
 });
@@ -69,6 +86,22 @@ const Weather = function(jsonData) {
     return {
       'forecast': summary,
       'time': time
+    };
+  });
+};
+
+const Event = function(jsonData) {
+  this.events = [...jsonData.body.events].slice(0, 20).map((event) => {
+    const link = event.url;
+    const name = event.name.text;
+    const event_date = new Date(event.start.utc).toDateString();
+    const summary = event.description.text;
+
+    return {
+      'link': link,
+      'name': name,
+      'event_date': event_date,
+      'summary': summary
     };
   });
 };
