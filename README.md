@@ -72,6 +72,17 @@ Finish time: 1045
 
 Actual time needed to complete: 30min
 ```
+```
+Number and name of feature: Implement eventbrite api call
+
+Estimate of time needed to complete: 60min
+
+Start time: 1045
+
+Finish time: 1145
+
+Actual time needed to complete: 60min
+```
 
 ## License:
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/stephenchu530/lab-07-back-end/blob/master/LICENSE)
