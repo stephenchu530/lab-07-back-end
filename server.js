@@ -1,6 +1,7 @@
 'use strict';
 
 require('dotenv').config();
+const superagent = require('superagent');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -13,16 +14,21 @@ app.get('/hello', (request, response) => {
 });
 
 app.get('/location', (request, response) => {
-  try {
-    const locationData = require('./data/geo.json');
-    const locationObj = new Location(request.query.data, locationData);
+  const queryData = request.query.data;
+  let geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${queryData}&key=AIzaSyBfOxvSAEhF0bINfqhSTthhNKEBb8eHfHc`;
+  console.log('URL:', geocodeURL);
+  superagent.get(geocodeURL)
+    .end((err, res) => {
+      if (err && err.status !== 200) {
+        const errorResponse500 = {'status': 500, 'responseText': 'Sorry, something went wrong' };
 
-    response.status(200).send(locationObj);
-  } catch (error) {
-    const errorResponse500 = {'status': 500, 'responseText': 'Sorry, something went wrong' };
-
-    response.status(500).send(errorResponse500);
-  }
+        response.status(500).send(errorResponse500);
+      } else {
+        console.log('RES:',res);
+        const location = new Location(queryData, res);
+        response.status(200).send(location);
+      }
+    });
 });
 
 app.get('/weather', (request, response) => {
@@ -44,9 +50,9 @@ app.use('*', (request, response) => response.send('Sorry, that route does not ex
 app.listen(PORT,() => console.log(`Listening on port ${PORT}`));
 
 const Location = function(searchQuery, jsonData) {
-  const formattedQuery = jsonData['results'][0]['formatted_address'];
-  const latitude = jsonData['results'][0]['geometry']['location']['lat'];
-  const longitude = jsonData['results'][0]['geometry']['location']['lng'];
+  const formattedQuery = jsonData.body['results'][0]['formatted_address'];
+  const latitude = jsonData.body['results'][0]['geometry']['location']['lat'];
+  const longitude = jsonData.body['results'][0]['geometry']['location']['lng'];
 
   this.search_query = searchQuery;
   this.formatted_query = formattedQuery;
