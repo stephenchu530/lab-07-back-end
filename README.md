@@ -4,7 +4,7 @@
 
 City Explorer backend app
 
-**Author**: Stephen Chu,
+**Author**: Jhia Turner, Stephen Chu,
 
 **Version**: 1.1.0 (increment the patch/fix version number if you make more commits past your first submission)
 
@@ -35,7 +35,7 @@ From the terminal, run one of the following to make a local copy:
 
 
 ## Credits and Collaborations
-* Name [<githubname>](https://github.com/<githubname>)
+* Jhia Turner, [jhimitu](https://github.com/jhimitu)
 * Stephen Chu, [stephenchu530](https://github.com/stephenchu530)
 
 ## Time Estimation
