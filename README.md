@@ -42,13 +42,24 @@ From the terminal, run one of the following to make a local copy:
 ```
 Number and name of feature: Refactor callback to use .map()
 
-Estimate of time needed to complete: ____
+Estimate of time needed to complete: 60min
 
-Start time: ____
+Start time: 0900
 
-Finish time: ____
+Finish time: 0915
 
-Actual time needed to complete: ____
+Actual time needed to complete: 15min
+```
+```
+Number and name of feature: Implement google map api call
+
+Estimate of time needed to complete: 60min
+
+Start time: 0915
+
+Finish time: 1015
+
+Actual time needed to complete: 15min
 ```
 
 ## License:
