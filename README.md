@@ -59,7 +59,7 @@ Start time: 0915
 
 Finish time: 1015
 
-Actual time needed to complete: 15min
+Actual time needed to complete: 60min
 ```
 
 ## License:
