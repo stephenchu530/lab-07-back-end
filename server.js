@@ -55,17 +55,12 @@ const Location = function(searchQuery, jsonData) {
 };
 
 const Weather = function(jsonData) {
-  this.dailyForecast = [...jsonData['daily']['data']];
-
-  forecastSummary.forEach(forecast => {
+  this.dailyForecast = [...jsonData['daily']['data']].map(forecast => {
     const summary = forecast['summary'];
     const time = (new Date(forecast['time'] * 1000)).toDateString();
-
-    this.dailyForecast.push({
+    return {
       'forecast': summary,
-      'time': time,
-    });
-  });
-  this.dailyForecast.map(forecast => {
+      'time': time
+    };
   });
 };

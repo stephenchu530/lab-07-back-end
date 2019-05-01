@@ -209,4 +209,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+data/
+
 # End of https://www.gitignore.io/api/macos,linux,emacs,windows,node
